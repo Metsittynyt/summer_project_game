@@ -1,5 +1,7 @@
 # summer_project_game
 
+d: #siirtyäkseen tera tiedostoihin
+
 cd <project_directory> #siirry projekti kansioon
 
 git status #katso status
