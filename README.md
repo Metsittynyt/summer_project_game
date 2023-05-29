@@ -1,13 +1,13 @@
 # summer_project_game
 
-cd <project_directory>
+cd <project_directory> #siirry projekti kansioon
 
-git status
+git status #katso status
 
-git add -A
+git add -A #lisää muutokset
 
-git commit -m "message"
+git commit -m "message" #kommentoi muutoksia
 
-git push origin master
+git push origin master #menee pilveen
 
-git pull origin master
+git pull origin master #tulee pilvestä
