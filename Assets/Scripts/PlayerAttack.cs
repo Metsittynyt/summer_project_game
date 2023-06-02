@@ -19,7 +19,8 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        // Enter is key to attck
+        if (Input.GetKeyDown(KeyCode.Return)) {
             Debug.Log("ATTACK!");
             Attack();
         }
@@ -29,6 +30,7 @@ public class PlayerAttack : MonoBehaviour
             if (timer >= timeToAttack) {
                 timer = 0;
                 attacking = false;
+                Debug.Log("attacking is false");
                 attackArea.SetActive(attacking);
             }
         }
@@ -36,7 +38,9 @@ public class PlayerAttack : MonoBehaviour
 
     private void Attack() {
         attacking = true;
-        Debug.Log("attacking is true");
+        if (attacking == true) {
+            Debug.Log("attacking is true");
+        }
         attackArea.SetActive(attacking);
     }
 }
