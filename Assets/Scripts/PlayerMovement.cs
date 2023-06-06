@@ -20,6 +20,11 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
+        transform.position = new Vector3(
+            Mathf.Clamp(transform.position.x, 0f, 500f),
+            Mathf.Clamp(transform.position.y, -10f, 10f),
+            transform.position.z);
+
         if (Input.GetButtonDown("Jump") && IsGrounded() )
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
