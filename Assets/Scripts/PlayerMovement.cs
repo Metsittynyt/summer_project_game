@@ -2,57 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
-{
+public class PlayerMovement : MonoBehaviour {
 
-    private float horizontal;
-    public float speed = 8f;
-    public float jumpingPower = 8f;
-    private bool isFacingRight = true;
+	public CharacterController2D controller;
 
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private LayerMask groundLayer;
+    public Animator animator;
 
+	public float runSpeed = 40f;
 
-    // Update is called once per frame
-    void Update()
-    {
-        horizontal = Input.GetAxisRaw("Horizontal");
+	float horizontalMove = 0f;
+	bool jump = false;
+	bool crouch = false;
+	
+	// Update is called once per frame
+	void Update () {
 
-        if (Input.GetButtonDown("Jump") && IsGrounded() )
-        {
-            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-        }
+		horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
-        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-        }
-    
-        Flip();
+        animator.SetFloat("speed", Mathf.Abs(horizontalMove));
+
+		if (Input.GetButtonDown("Jump"))
+		{
+			jump = true;
+            animator.SetBool("IsJumping", true);
+		}
+
+		if (Input.GetButtonDown("Crouch"))
+		{
+			crouch = true;
+		} else if (Input.GetButtonUp("Crouch"))
+		{
+			crouch = false;
+		}
+
+	}
+
+    public void OnLanding() {
+        animator.SetBool("IsJumping", false);
     }
 
-    private void FixedUpdate()
-    {
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
-    }
-
-    private bool IsGrounded()
-    {
-        return Physics2D.OverlapCircle(groundCheck.position,
-         0.2f, groundLayer);
-    }
-
-    private void Flip()
-    {
-        if (isFacingRight && horizontal < 0f 
-        || !isFacingRight && horizontal > 0f)
-        {
-            isFacingRight = !isFacingRight;
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
-        }
-    }
+	void FixedUpdate ()
+	{
+		// Move our character
+		controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
+		jump = false;
+	}
 }
