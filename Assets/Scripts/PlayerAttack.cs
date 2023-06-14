@@ -7,7 +7,8 @@ public class PlayerAttack : MonoBehaviour
 
     private GameObject attackArea = default;
     private bool attacking = false;
-    private float timeToAttack = 0.25f;
+    public Animator animator;
+    private float timeToAttack = 0.4f;
     private float timer = 0f;
 
     // Start is called before the first frame update
@@ -30,6 +31,7 @@ public class PlayerAttack : MonoBehaviour
             if (timer >= timeToAttack) {
                 timer = 0;
                 attacking = false;
+                animator.SetBool("IsAttacking", false);
                 Debug.Log("attacking is false");
                 attackArea.SetActive(attacking);
             }
@@ -39,6 +41,7 @@ public class PlayerAttack : MonoBehaviour
     private void Attack() {
         attacking = true;
         if (attacking == true) {
+            animator.SetBool("IsAttacking", true);
             Debug.Log("attacking is true");
         }
         attackArea.SetActive(attacking);
