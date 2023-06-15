@@ -13,10 +13,16 @@ public class MainMenuUI : MonoBehaviour
     }
 
     public void StartGameButton(){
-        SceneManager.LoadScene(1);
+        // SceneManager.LoadScene(1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void OptionsButton() {
+
     }
 
     public void ExitGameButton() {
+        Debug.Log("Quit");
         Application.Quit();
     }
 }
