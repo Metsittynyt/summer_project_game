@@ -4,46 +4,42 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-
-    private GameObject attackArea = default;
-    private bool attacking = false;
     public Animator animator;
-    private float timeToAttack = 0.4f;
-    private float timer = 0f;
+    public Transform attackArea;
+    public LayerMask enemyLayers;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        attackArea = transform.GetChild(0).gameObject;
-    }
+    public float attackRange = 0.5f;
+    public int attackDamage = 3;
+
 
     // Update is called once per frame
     void Update()
     {
-        // Enter is key to attck
-        if (Input.GetKeyDown(KeyCode.Return)) {
-            Debug.Log("ATTACK!");
+        if (Input.GetButtonDown("Fire1")) {
             Attack();
-        }
-
-        if (attacking) {
-            timer += Time.deltaTime;
-            if (timer >= timeToAttack) {
-                timer = 0;
-                attacking = false;
-                animator.SetBool("IsAttacking", false);
-                Debug.Log("attacking is false");
-                attackArea.SetActive(attacking);
-            }
         }
     }
 
-    private void Attack() {
-        attacking = true;
-        if (attacking == true) {
-            animator.SetBool("IsAttacking", true);
-            Debug.Log("attacking is true");
+    void Attack() {
+        // Play attack animation
+        animator.SetTrigger("Attack");
+
+        // Deteck enemies in range of attack
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackArea.position, attackRange, enemyLayers);
+        
+        // Damage enemies
+        foreach(Collider2D enemy in hitEnemies) {
+            Debug.Log("Player hit " + enemy.name + "!");
+            enemy.GetComponent<Health>().Damage(attackDamage);
         }
-        attackArea.SetActive(attacking);
+        
+    }
+
+    void OnDrawGizmosSelected() {
+        if (attackArea == null) {
+            return;
+        }
+        Gizmos.DrawWireSphere(attackArea.position, attackRange);
+
     }
 }
