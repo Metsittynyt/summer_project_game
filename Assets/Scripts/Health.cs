@@ -5,19 +5,26 @@ using System;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private int health = 100;
-    private int MAX_HEALTH = 100;
+    [SerializeField]
+    float health;
+    [SerializeField]
+    float MAX_HEALTH = 100;
 
     public static Action OnPlayerDeath;
     public static Action OnEnemyDeath;
 
+    void Start()
+    {
+        this.health = MAX_HEALTH;
+        
+    }
 
     // Update once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
-            // Damage(10);
+            Damage(10);
         }
 
         if (Input.GetKeyDown(KeyCode.R))
@@ -28,11 +35,17 @@ public class Health : MonoBehaviour
 
     public void Damage(int amount)
     {
+        Debug.Log(this.health);
+        Debug.Log(this);
+        this.health = this.GetComponent<Stats>().GetHealth();
+        Debug.Log(gameObject.name + " takes " + amount + " damage.");
+
         if (amount < 0)
         {
             throw new System.ArgumentOutOfRangeException("Cannot have negative damage");
         }
-        this.health -= amount;
+        //health -= amount;
+        this.health = this.GetComponent<Stats>().UpdateHealth(amount);
 
         if (health <= 0)
         {
@@ -65,7 +78,7 @@ public class Health : MonoBehaviour
     {
         Destroy(gameObject);
         Debug.Log(gameObject.name + " died!");
-        
+
         if (this.CompareTag("Player"))
         {
             Time.timeScale = 0;
