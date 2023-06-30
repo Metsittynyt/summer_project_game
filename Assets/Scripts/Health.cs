@@ -24,7 +24,7 @@ public class Health : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
-            Damage(10);
+            // Damage(10);
         }
 
         if (Input.GetKeyDown(KeyCode.R))
@@ -44,8 +44,8 @@ public class Health : MonoBehaviour
         {
             throw new System.ArgumentOutOfRangeException("Cannot have negative damage");
         }
-        //health -= amount;
-        this.health = this.GetComponent<Stats>().UpdateHealth(amount);
+        this.health -= amount;
+        this.health = this.GetComponent<Stats>().UpdateHealth(this.health);
 
         if (health <= 0)
         {
