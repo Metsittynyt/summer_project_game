@@ -4,25 +4,31 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    [SerializeField]
+    public Character c;
     public Animator animator;
     public Transform attackArea;
     public LayerMask enemyLayers;
 
     public float attackRange = 0.5f;
-    public int attackDamage = 3;
+    public int attackPower;
     public float attackRate = 2f;
 
-    float newxtAttackTime = 0f;
+    float attacCooldown = 0f;
+
+    void Start() {
+        attackPower = c.attackPower;
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.time >= newxtAttackTime)
+        if (Time.time >= attacCooldown)
         {
             if (Input.GetButtonDown("Fire1"))
             {
                 Attack();
-                newxtAttackTime = Time.time + 1f / attackRate;
+                attacCooldown = Time.time + 1f / attackRate;
             }
         }
     }
@@ -43,7 +49,7 @@ public class PlayerAttack : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             Debug.Log("Player hit " + enemy.name + "!");
-            enemy.GetComponent<Health>().Damage(attackDamage);
+            enemy.GetComponent<Health>().Damage(attackPower);
         }
     }
 

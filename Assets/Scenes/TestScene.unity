@@ -275,7 +275,6 @@ GameObject:
   - component: {fileID: 13375879}
   - component: {fileID: 13375881}
   - component: {fileID: 13375880}
-  - component: {fileID: 13375885}
   m_Layer: 3
   m_Name: Player
   m_TagString: player
@@ -428,8 +427,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fddcf2ad28fefc40bf4ca609051200b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  c: {fileID: 11400000, guid: 14b77f34d8c7b264d8f94475b3b98a9a, type: 2}
   health: 0
-  MAX_HEALTH: 100
 --- !u!114 &13375881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -442,13 +441,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f74b336b50118b40a8132368aa28f03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  c: {fileID: 11400000, guid: 14b77f34d8c7b264d8f94475b3b98a9a, type: 2}
   animator: {fileID: 13375882}
   attackArea: {fileID: 1845666148}
   enemyLayers:
     serializedVersion: 2
     m_Bits: 128
   attackRange: 1
-  attackDamage: 3
+  attackPower: 3
   attackRate: 2
 --- !u!95 &13375882
 Animator:
@@ -527,21 +527,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.4999994}
   serializedVersion: 2
   m_Radius: 0.14647336
---- !u!114 &13375885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 13375874}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7a7a532e5152554d83b7779a29315f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerHealth: 0
-  MAX_HEALTH: 20
-  level: 1
 --- !u!1 &83645619
 GameObject:
   m_ObjectHideFlags: 0
@@ -32204,7 +32189,6 @@ GameObject:
   - component: {fileID: 377575033}
   - component: {fileID: 377575029}
   - component: {fileID: 377575028}
-  - component: {fileID: 377575034}
   m_Layer: 7
   m_Name: practice_dummy
   m_TagString: Untagged
@@ -32224,8 +32208,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fddcf2ad28fefc40bf4ca609051200b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  c: {fileID: 11400000, guid: a9ae5b912e0e5514f98479dd630878f6, type: 2}
   health: 0
-  MAX_HEALTH: 9
 --- !u!50 &377575029
 Rigidbody2D:
   serializedVersion: 4
@@ -32340,20 +32324,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.64, y: 1.28}
   m_EdgeRadius: 0
---- !u!114 &377575034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 377575027}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a93390ddec656a4285442ef8be013db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 0
-  MAX_HEALTH: 12
 --- !u!1 &414766900
 GameObject:
   m_ObjectHideFlags: 0

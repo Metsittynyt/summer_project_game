@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Save : MonoBehaviour
 {
     public int playerHealth;
     public int MAX_HEALTH = 20;
     public int level = 1;
 
     public void GetHealth () {
-        Debug.Log("Player script!");
+        Debug.Log("Save script!");
     }
     public void SavePlayer () {
         SaveSystem.SavePlayer(this);

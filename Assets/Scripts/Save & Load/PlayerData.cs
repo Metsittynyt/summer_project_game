@@ -9,7 +9,7 @@ public class PlayerData
     public int level;
     public float[] position;
 
-    public PlayerData (Player player) {
+    public PlayerData (Save player) {
         health = player.playerHealth;
         level = player.level;
 
